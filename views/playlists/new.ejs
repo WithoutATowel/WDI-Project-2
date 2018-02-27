@@ -1,0 +1,25 @@
+<%- include ../partials/header.ejs %>
+<% include ../partials/nav %>
+<% include ../partials/alerts %>
+
+<div class="container">
+  <h1>New Playlist</h1>
+  <form method="POST" action="/playlists">
+    <label for="playlist-name">Playlist name:</label><br>
+    <input type="text" name="name" id="playlist-name"><br>
+    <div class="input-field col s12">
+      <select name="members" multiple>
+        <option value="" disabled selected>Select public user names</option>
+        <% users.forEach(function(user) { %>
+          <option value="<%= user.id %>"><%= user.displayName %></option>
+        <% }) %>
+      </select>
+    <label>Members</label>
+    </div>
+    <input type="checkbox" name="share" id="share-playlist">
+    <label for="share-playlist">Share playlist to members</label><br><br>
+    <input type="submit" class="waves-effect waves-light btn" value="Create Playlist">
+  </form>
+</div>
+
+<%- include ../partials/footer.ejs %>

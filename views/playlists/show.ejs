@@ -1,0 +1,30 @@
+<%- include ../partials/header.ejs %>
+<% include ../partials/nav %>
+<% include ../partials/alerts %>
+
+<div class="container">
+    <h1><%= playlist.name %></h1>
+    <table>
+      <thead>
+        <tr>
+            <th>Track Name</th>
+            <th>Artist</th>
+            <th>Preview</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% playlist.songs.forEach(function(song) { %>
+          <tr>
+            <td><%= song.name %></td>
+            <td><%= "placeholder" %></td>
+            <td><%= "placeholder" %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <hr>
+    <a class="waves-effect waves-light btn save-to-spotify-link" href="/playlists/<%= playlist.id %>/spotify">Save to Spotify</a>
+    <a class="waves-effect waves-light btn delete-playlist-link" href="/playlists/<%= playlist.id %>">Delete</a>
+</div>
+
+<%- include ../partials/footer.ejs %>

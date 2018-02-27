@@ -1,0 +1,28 @@
+<%- include ../partials/header.ejs %>
+<% include ../partials/nav %>
+<% include ../partials/alerts %>
+
+<div class="container">
+    <h2>My Playlists</h2>
+    <table>
+      <thead>
+        <tr>
+            <th>Playlist Name</th>
+            <th>Tracks</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% playlists.forEach(function(playlist) { %>
+          <tr>
+            <td><a href="/playlists/<%= playlist.id %>"><%= playlist.name %></a></td>
+            <td><%= playlist.trackCount %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+      <hr>
+      <a class="waves-effect waves-light btn" href="/playlists/new">New Playlist</a>
+</div>
+
+<%- include ../partials/footer.ejs %>
