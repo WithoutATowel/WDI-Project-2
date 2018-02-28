@@ -6,25 +6,31 @@ var isLoggedIn = require('../middleware/isLoggedIn');
 var router = express.Router();
 
 // GET /profile 
-router.get('/', function(req, res) {
-    db.user.findById(req.user.id).then(function(user) {
-        res.render('profile/index', { user: user });
-    });
+router.get('/', isLoggedIn, function(req, res) {
+    res.render('profile/index', { user: req.user });
 });
 
 // PUT /profile
-router.put('/', function(req, res) {
+router.put('/', isLoggedIn, function(req, res) {
     db.user.update({
         displayName: req.body.publicName
     }, {
         where: { id: req.user.id }
-    }).then(function() {
-        res.send("success!");
+    }).then(function(data) {
+        db.user.findById(req.user.id).then(function(user) {
+            req.login(user, function(err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+            // ADD FLASH MESSAGE HERE
+            res.send("success!");
+        });
     });
 });
 
 // DELETE /profile
-router.delete('/', function(req, res) {
+router.delete('/', isLoggedIn, function(req, res) {
     // Use async for this
     // Delete playlists_songs for owned playlists
     // Delete playlists

@@ -2,6 +2,7 @@ var express = require('express');
 var db = require('../models');
 var passport = require('../config/passport-config');
 var request = require('request');
+var isLoggedIn = require('../middleware/isLoggedIn');
 var router = express.Router();
 
 // Initial call to Spotify, handled by passport
@@ -24,11 +25,10 @@ router.get('/spotify/callback',
 });
 
 // Logout route
-router.get('/logout', function(req, res) {
-    req.logout(); // This is a passport method
-    console.log('logged out');
+router.get('/logout', isLoggedIn, function(req, res) {
+    req.logOut();
     req.flash('success', 'You have logged out!');
-    res.redirect('/');
+    res.render('index', { logout: true });
 });
 
 module.exports = router;

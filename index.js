@@ -28,7 +28,6 @@ app.use(function(req, res, next) {  // Before every route, attach the flash mess
   next();
 });
 
-
 // SET TOP LEVEL ROUTES, LOAD CONTROLLERS
 app.get('/', function(req, res) {
   res.render('index');

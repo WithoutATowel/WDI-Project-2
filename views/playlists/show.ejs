@@ -13,11 +13,11 @@
         </tr>
       </thead>
       <tbody>
-        <% playlist.songs.forEach(function(song) { %>
+        <% playlist.songs.forEach(function(song, index) { %>
           <tr>
             <td><%= song.name %></td>
-            <td><%= "placeholder" %></td>
-            <td><%= "placeholder" %></td>
+            <td><%= artists[index].name %></td>
+            <td><audio controls src="<%= song.previewUrl %>"></audio></td>
           </tr>
         <% }) %>
       </tbody>

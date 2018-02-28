@@ -13,10 +13,10 @@
       </thead>
 
       <tbody>
-        <% playlists.forEach(function(playlist) { %>
+        <% playlists.forEach(function(playlist, index) { %>
           <tr>
-            <td><a href="/playlists/<%= playlist.id %>"><%= playlist.name %></a></td>
-            <td><%= playlist.trackCount %></td>
+            <td><%= (index + 1) + ". "%><a href="/playlists/<%= playlist.id %>"><%= playlist.name %></a></td>
+            <td><%= playlist.songs.length %></td>
           </tr>
         <% }) %>
       </tbody>

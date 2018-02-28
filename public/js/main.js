@@ -5,7 +5,7 @@ $(document).ready(function() {
         event.preventDefault();
         // Ping GET playlists/:id/spotify to export
         $.ajax({
-            method: "GET",
+            method: "POST",
             url: $(this).attr('href')
         }).done(function() {
         // After the AJAX call comes back, flash a success message?
@@ -23,7 +23,7 @@ $(document).ready(function() {
         });
     });
 
-    $('.update-public-name').click(function(event) {
+    $('.update-public-name').submit(function(event) {
         event.preventDefault();
         // Ping PUT /profile route with form data
         $.ajax({
@@ -45,4 +45,8 @@ $(document).ready(function() {
             window.location = '/auth/logout';
         });
     });
+
+    if('logout' in window && logout) {
+        $('body').append('<iframe src="https://www.spotify.com/us/logout/" style="display:none;" width="1px" height="1px"></iframe>');
+    }
 });

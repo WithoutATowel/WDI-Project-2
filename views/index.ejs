@@ -2,6 +2,7 @@
 <% include ./partials/nav %>
 <% include ./partials/alerts %>
 
+
 <div class="container">
     <h1>PartyPlaylist</h1>
     <div id="login">
@@ -14,5 +15,10 @@
         <li>Enjoy.</li>
     </ol>
 </div>
+
+<script> 
+    <% var logout = logout ? logout : false; %>
+    var logout = <%= logout %>
+</script>
 
 <%- include ./partials/footer.ejs %>
