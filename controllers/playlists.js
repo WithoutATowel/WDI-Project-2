@@ -9,7 +9,7 @@ var async = require('async');
 var isLoggedIn = require('../middleware/isLoggedIn');
 var router = express.Router();
 
-var query = 'SELECT songs.id, songs.popularity, count(users_songs."userId") AS user_count FROM users_songs JOIN songs ON songs.id = users_songs."songId" JOIN artists ON songs."artistId" = artists.id WHERE users_songs."userId" IN ($USER1, $USER2) GROUP BY 1,2 HAVING count(users_songs."userId") > 1';
+var query = 'SELECT songs.id, songs.popularity, count(users_songs."userId") AS user_count FROM users_songs JOIN songs ON songs.id = users_songs."songId" JOIN artists ON songs."artistId" = artists.id WHERE users_songs."userId" IN ($USERS) GROUP BY 1,2 HAVING count(users_songs."userId") > 1';
 
 // GET /playlists view all playlists 
 router.get('/', isLoggedIn, function(req, res) {
@@ -39,19 +39,22 @@ router.get('/new', isLoggedIn, function(req, res) {
     });
 });
 
-// POST /playlists/new receive form data and create a playlist
+// POST /playlists receive form data and create a playlist
 router.post('/', isLoggedIn, function(req, res) {
-    var members = req.body.members;
-    members = members.map((item) => parseInt(item));
-    var localQuery = query.replace('$USER1', members[0]);
-    localQuery = localQuery.replace('$USER2', members[1]);
+    var members = '';
+    req.body.members.forEach((item) => members += item + ',');
+    members = members.slice(0,-1);
+    var localQuery = query.replace('$USERS', members);
+    // Create playlist object
     db.playlist.create({
         name: req.body.name
     }).then(function(playlist){
+        // Associate playlist with user
         db.users_playlists.create({
             userId: req.user.id,
             playlistId: playlist.id
         }).then(function() {
+                // Find songs that all users like and associate them with the playlist
                 sequelize.query(localQuery).then(function(results){
                     results[0].forEach(function(song) {
                         db.playlists_songs.create({
@@ -60,7 +63,8 @@ router.post('/', isLoggedIn, function(req, res) {
                         });
                     });
                 }).then(function() {
-                    res.redirect('/playlists');
+                    req.method = 'GET';
+                    res.redirect('/playlists/' + playlist.id);
                 });
             }
         );
@@ -103,10 +107,10 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
     function createPlaylist(callback) {
         if (result === "success") {
             // The playlist has already created successfully. Call the next function.
-            console.log("~~~~SECOND TIME THROUGH createPlaylist! FIRST TIME WORKED!");
+            // console.log("~~~~SECOND TIME THROUGH createPlaylist! FIRST TIME WORKED!");
             callback();
         } else {
-            console.log("~~~~TRYING TO CREATE PLAYLIST");
+            // console.log("~~~~TRYING TO CREATE PLAYLIST");
             // Prep options and create the playlist.
             db.playlist.findById(playlistId).then(function(playlist) {
                 var newSpotifyPlaylist = {
@@ -121,8 +125,8 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
                     json: true
                 };
                 request(playlistCreateOptions, function(error, response, body) {
-                    console.log("~~~RESPONSE TO PLAYLIST CREATE");
-                    console.log(body);
+                    // console.log("~~~RESPONSE TO PLAYLIST CREATE");
+                    // console.log(body);
                     if(body.error && body.error.status === 401) {
                         // Creation failed. Pass message so that refreshCredentials() can do its thing.
                         result = "first playlist creation attempt failed";
@@ -145,11 +149,11 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
     }
 
     function refreshCredentials(callback) {
-        console.log("~~~~INSIDE OF refreshCredentials");
+        // console.log("~~~~INSIDE OF refreshCredentials");
         if (result !== "first playlist creation attempt failed") {
             // Playlist was created. No need to refresh credentials.
-            console.log("~~~~IT WORKED! NO NEED TO REFRESH CREDENTIALS");
-            console.log("~~~~RESULT VARIABLE IS: " + result);
+            // console.log("~~~~IT WORKED! NO NEED TO REFRESH CREDENTIALS");
+            // console.log("~~~~RESULT VARIABLE IS: " + result);
             callback();
         } else {
             // Playlist was not created. Refresh credentials and try again.
@@ -175,7 +179,7 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
                     db.user.findById(userId).then(function(user) {
                         req.login(user, function(err) {
                             if (err) {
-                                console.log("~~~FINISHED REFRESHING. LET'S CALLBACK!");
+                                // console.log("~~~FINISHED REFRESHING. LET'S CALLBACK!");
                                 callback();
                             }
                         });
@@ -186,7 +190,7 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
     }
     
     function addSongsToPlaylist(callback) {
-        console.log("~~~~MADE IT INTO addSongsToPlaylist()!");
+        // console.log("~~~~MADE IT INTO addSongsToPlaylist()!");
         // Retrieve the playlists songs from the database and prepare to send them through to the Spotify API
         db.playlist.findOne({
             where: { id: playlistId },
@@ -218,11 +222,11 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
     }     
     
     async.series([createPlaylist, refreshCredentials, createPlaylist, addSongsToPlaylist], function(err, results) {
-      res.send('Done!');
+        req.flash('success', 'Playlist exported to Spotify!');
+        res.send('success');
     });  
 
-}); 
-        
+});   
 
 // DELETE /playlists/:id delete a playlist
 router.delete('/:id', isLoggedIn, function(req, res) {

@@ -8,7 +8,8 @@ $(document).ready(function() {
             method: "POST",
             url: $(this).attr('href')
         }).done(function() {
-        // After the AJAX call comes back, flash a success message?
+            // Reload the page to show flash message
+            window.location.reload();
         });
     });
 
@@ -19,6 +20,7 @@ $(document).ready(function() {
             method: "DELETE",
             url: $(this).attr('href')
         }).done(function(){
+            // Reload the page to remove playlist from table
             window.location = '/playlists';
         });
     });
@@ -31,7 +33,8 @@ $(document).ready(function() {
             url: $(this).attr('action'),
             data: { publicName: $('#publicName').val() }
         }).done(function() {
-        // After the AJAX call comes back, flash a success message?
+            // Reload the page to show flash message
+            window.location.reload();
         });
     });
 
