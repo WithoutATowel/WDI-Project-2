@@ -2,15 +2,20 @@ $(document).ready(function() {
     $('select').material_select();
 
     $('.save-to-spotify-link').click(function(event) {
-        event.preventDefault();
-        // Ping GET playlists/:id/spotify to export
-        $.ajax({
-            method: "POST",
-            url: $(this).attr('href')
-        }).done(function() {
-            // Reload the page to show flash message
-            window.location.reload();
-        });
+        if ($(this).attr('href').search('open') !== -1) {
+            // Button links to Spotify, so do nothing. Let the click go through.
+        } else {
+            event.preventDefault();
+            $(this).attr("disabled", "disabled");
+            // Ping GET playlists/:id/spotify to export
+            $.ajax({
+                method: "POST",
+                url: $(this).attr('href')
+            }).done(function() {
+                // Reload the page to show flash message
+                window.location.reload();
+            });
+        }
     });
 
     $('.delete-playlist-link').click(function(event) {

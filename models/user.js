@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     displayName: DataTypes.STRING,
     accessToken: DataTypes.STRING,
-    refreshToken: DataTypes.STRING
+    refreshToken: DataTypes.STRING,
+    songDataDownloaded: DataTypes.BOOLEAN
   }, {});
   user.associate = function(models) {
     models.user.belongsToMany(models.playlist, {through: models.users_playlists});

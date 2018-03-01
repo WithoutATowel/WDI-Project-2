@@ -4,6 +4,10 @@
 
 <div class="container">
     <h1><%= playlist.name %></h1>
+    <% var spotifyButtonText = (playlist.spotifyId === null) ? 'Save to Spotify' : 'View in Spotify' %>
+    <% var spotifyButtonLink = (playlist.spotifyId === null) ? ('/playlists/' + playlist.id + '/spotify') : ('http://open.spotify.com/user/' + user.spotifyId + '/playlist/' + playlist.spotifyId) %>
+    <a class="waves-effect waves-light btn save-to-spotify-link" href="<%= spotifyButtonLink %>" target="_blank"><%= spotifyButtonText %></a>
+    <a class="waves-effect waves-light btn delete-playlist-link" href="/playlists/<%= playlist.id %>">Delete</a>
     <table>
       <thead>
         <tr>
@@ -22,9 +26,6 @@
         <% }) %>
       </tbody>
     </table>
-    <hr>
-    <a class="waves-effect waves-light btn save-to-spotify-link" href="/playlists/<%= playlist.id %>/spotify">Save to Spotify</a>
-    <a class="waves-effect waves-light btn delete-playlist-link" href="/playlists/<%= playlist.id %>">Delete</a>
 </div>
 
 <%- include ../partials/footer.ejs %>

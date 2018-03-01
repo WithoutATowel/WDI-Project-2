@@ -26,6 +26,9 @@ module.exports = {
       refreshToken: {
         type: Sequelize.STRING
       },
+      songDataDownloaded: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

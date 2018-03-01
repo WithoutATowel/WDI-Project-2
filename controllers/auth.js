@@ -8,7 +8,7 @@ var router = express.Router();
 // Initial call to Spotify, handled by passport
 router.get('/spotify',
   passport.authenticate('spotify', {
-    scope: ['user-read-email', 'user-read-private', 'user-top-read', 'user-read-recently-played', 'user-library-read', 'playlist-modify-private'], 
+    scope: ['user-read-email', 'user-read-private', 'user-top-read', 'user-read-recently-played', 'user-library-read', 'playlist-read-private', 'playlist-read-collaborative', 'playlist-modify-private'], 
     showDialog: false 
   }),
   function(req, res){
@@ -20,8 +20,12 @@ router.get('/spotify/callback',
   passport.authenticate('spotify', { failureRedirect: '/' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    req.flash('success', 'You have logged in!');
-    res.redirect('/playlists');
+    if(req.user.isNew) {
+      res.redirect('/profile/download');
+    } else {
+      req.flash('success', 'You have logged in!');
+      res.redirect('/playlists');
+    }
 });
 
 // Logout route
