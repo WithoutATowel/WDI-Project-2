@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $('select').material_select();
+    $('.button-collapse').sideNav();
 
     $('.save-to-spotify-link').click(function(event) {
         if ($(this).attr('href').search('open') !== -1) {

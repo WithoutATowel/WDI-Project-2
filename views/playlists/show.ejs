@@ -16,7 +16,7 @@
                     <tr>
                         <th>Track Name</th>
                         <th class="center-align">Artist</th>
-                        <th class="right-align">Preview</th>
+                        <th class="right-align hide-on-small-only">Preview</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,7 +24,7 @@
                         <tr>
                             <td><%= song.name %></td>
                             <td class="center-align"><%= artists[index].name %></td>
-                            <td class="right-align"><audio controls src="<%= song.previewUrl %>"></audio></td>
+                            <td class="right-align hide-on-small-only"><audio controls src="<%= song.previewUrl %>"></audio></td>
                         </tr>
                     <% }) %>
                 </tbody>

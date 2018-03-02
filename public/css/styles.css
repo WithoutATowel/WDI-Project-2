@@ -1,14 +1,28 @@
 /* =============== GENERAL ================ */
-html, body {
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 0;
   padding: 0;
-  font-family: 'Mukta Mahee', sans-serif; }
+  font-family: 'Mukta Mahee', sans-serif;
+  position: relative;
+  min-height: 100vh; }
 
 nav {
   background-color: #557A95; }
 
+footer {
+  text-align: center;
+  background: #969599;
+  color: white;
+  align-self: flex-end;
+  width: 100%; }
+
 h1 {
-  font-family: 'Arvo', serif; }
+  font-family: 'Arvo', serif;
+  font-size: 10vw;
+  margin-top: 0; }
 
 li label {
   position: relative !important;
@@ -32,8 +46,26 @@ li label {
   outline: 0; }
 
 .container {
-  width: 80%; }
+  width: 80%;
+  margin-top: 2.5%; }
 
+@media screen and (min-width: 600px) {
+  body {
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7)), url("../img/concert.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh; }
+
+  h1 {
+    font-size: 6vw; }
+
+  .container {
+    padding: 4% 4% 4% 4%;
+    margin-top: 4%;
+    margin-bottom: 2.5%;
+    background: white;
+    border-radius: 3px; } }
 /* ============= LANDING PAGE ============= */
 #landing {
   overflow: hidden;
@@ -46,7 +78,7 @@ li label {
   text-align: center; }
   #landing h1 {
     margin-top: 10%;
-    font-size: 10em;
+    font-size: 12vw;
     font-weight: bold; }
   #landing ol {
     display: inline-block; }
@@ -59,13 +91,24 @@ li label {
   #landing .btn:hover {
     background-color: #1ec95a; }
   #landing #intro {
-    margin-top: 5%;
+    margin-top: 10vh;
     font-size: 1.25em;
     font-weight: 500; }
+  @media screen and (max-width: 450px) {
+    #landing .btn {
+      width: 90%; } }
+  @media screen and (min-width: 600px) {
+    #landing .container {
+      background: none;
+      padding: 0;
+      margin-top: 0;
+      margin-bottom: 0; } }
 
 /* ============= MY PLAYLISTS ============= */
 /* ============= LANDING PAGE ============= */
 /* ============= LANDING PAGE ============= */
+#show-playlist .container {
+  padding-bottom: 2%; }
 #show-playlist .delete-playlist-link {
   margin-left: 5px; }
 

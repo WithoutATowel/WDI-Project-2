@@ -1,3 +1,5 @@
+<!-- oninvalid="this.setCustomValidity()" oninput="setCustomValidity('')" -->
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,11 +9,11 @@
         <% include ../partials/nav %>
         <div class="container">
             <h1>New Playlist</h1>
-            <form method="POST" action="/playlists">
-                <label for="playlist-name">Playlist name:</label><br>
-                <input type="text" name="name" id="playlist-name"><br>
+            <form method="POST" action="/playlists" id="new-playlist-form">
+                <label for="playlist-name" data-error='Please enter a playlist name.'>Playlist name:</label><br>
+                <input type="text" name="name" id="playlist-name" class="validate" required="required"><br>
                 <div class="input-field col s12">
-                    <select name="members" multiple>
+                    <select name="members" id="members" class="validate" multiple required onchange="setCustomValidity('')">
                         <option value="" disabled selected>Select public user names</option>
                         <% users.forEach(function(user) { %>
                             <option value="<%= user.id %>"><%= user.displayName %></option>
@@ -21,10 +23,28 @@
                 </div>
                 <input type="checkbox" name="share" id="share-playlist">
                 <label for="share-playlist">Share playlist to members</label><br><br>
-                <input type="submit" class="waves-effect waves-light btn" value="Create Playlist">
+                <input type="submit" class="waves-effect waves-light btn create-playlist" value="Create Playlist">
             </form>
         </div>
         <%- include ../partials/footer.ejs %>
         <% include ../partials/alerts %>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('select').material_select();
+                $('#new-playlist-form').on('submit', function(e) {
+                    e.preventDefault();
+                    if ($("#members").val().length === 0) {
+                        $("#members").addClass('invalid');
+                        // var multiselect = document.getElementById('members');
+                        // document.getElementById('playlist-name').setCustomValidity("WOOOO TESTING.");
+                        // document.getElementById('playlist-name').checkValidity();
+                        // multiselect.checkValidity();
+                    } else {
+                        $('input[type="submit"]').attr("disabled", "disabled");
+                        $("#new-playlist-form").submit();
+                    }
+                });
+            });
+        </script>  
     </body>
 </html>

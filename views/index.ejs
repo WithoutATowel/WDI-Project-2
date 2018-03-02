@@ -10,7 +10,7 @@
                 <div id="login">
                     <a href="/auth/spotify" class="btn btn-primary valign-wrapper">Log in with Spotify</a>
                 </div>
-                <p>Tired of wondering whether your friends like your music?</br>
+                <p>Tired of wondering whether your friends like your music?<br class="hide-on-small-only">
                 Automatically generate a playlist that the whole group will enjoy. It’s easy:</p>
                 <span>
                     <ol>
@@ -21,11 +21,14 @@
                 </span>
             </div>
         </div>
-        <%- include ./partials/footer.ejs %>
+        <!-- <%- include ./partials/footer.ejs %> -->
+        <script src="//code.jquery.com/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <script type="text/javascript" src="/js/main.js"></script>
         <script> 
             <% var logout = logout ? logout : false; %>
             var logout = <%= logout %>
         </script>
-        <% include ./partials/alerts %>
+        <!-- <% include ./partials/alerts %> -->
     </body>
 </html>
