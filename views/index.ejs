@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>PartyPlaylist</title>
         <%- include ./partials/header.ejs %>
     </head>
     <body id="landing">
-        <% include ./partials/alerts %>
         <div class="container">
             <h1>HARMONIZE</h1>
             <div id="intro">
@@ -13,7 +11,7 @@
                     <a href="/auth/spotify" class="btn btn-primary valign-wrapper">Log in with Spotify</a>
                 </div>
                 <p>Tired of wondering whether your friends like your music?</br>
-                Automatically generate a playlist that everyone will like. It’s easy:</p>
+                Automatically generate a playlist that the whole group will enjoy. It’s easy:</p>
                 <span>
                     <ol>
                         <li>Link Harmonize to your Spotify accounts.</li>
@@ -28,5 +26,6 @@
             <% var logout = logout ? logout : false; %>
             var logout = <%= logout %>
         </script>
+        <% include ./partials/alerts %>
     </body>
 </html>

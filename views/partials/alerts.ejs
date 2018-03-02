@@ -1,11 +1,11 @@
 <% if (alerts.error) { %>
     <% alerts.error.forEach(function(msg) { %>
-        <div class='alert alert-danger'><%= msg %></div>
+        <script> Materialize.toast('<%= msg %>', 1500) </script>
     <% }); %>
 <% } %>
 
 <% if (alerts.success) { %>
     <% alerts.success.forEach(function(msg) { %>
-        <div class='alert alert-success'><%= msg %></div>
+        <script> Materialize.toast('<%= msg %>', 1500) </script>
     <% }); %>
 <% } %>

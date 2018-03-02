@@ -57,4 +57,5 @@ $(document).ready(function() {
     if('logout' in window && logout) {
         $('body').append('<iframe src="https://www.spotify.com/us/logout/" style="display:none;" width="1px" height="1px"></iframe>');
     }
+
 });

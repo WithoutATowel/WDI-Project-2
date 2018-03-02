@@ -1,9 +1,8 @@
 /* =============== GENERAL ================ */
 
-$color-one: ;
-$color-two: ;
-$color-three: ;
-$color-four: ;
+$color-one: #557A95;
+$color-two: #5D5C61;
+$color-three: #969599;
 
 html, body {
     margin: 0;
@@ -11,8 +10,40 @@ html, body {
     font-family: 'Mukta Mahee', sans-serif;
 }
 
+nav {
+    background-color: $color-one;
+}
+
+h1 {
+    font-family: 'Arvo', serif;
+}
+
+li label {
+    position: relative !important;
+    top: -10px !important;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
 .btn {
     text-transform: none;
+    background-color: $color-two;
+    border-radius: 5px;
+}
+
+.btn:hover, .btn:active {
+    background-color: $color-three;
+}
+
+
+.btn:focus, input[type="submit"] {
+    outline: 0;
 }
 
 .container {
@@ -38,7 +69,6 @@ html, body {
         margin-top: 10%;
         font-size: 10em;
         font-weight: bold;
-        font-family: 'Arvo', serif;
     }
 
     ol{
@@ -81,7 +111,9 @@ html, body {
 /* ============= LANDING PAGE ============= */
 
 #show-playlist {
-
+    .delete-playlist-link {
+        margin-left: 5px;
+    }
 }
 
 /* ============= LANDING PAGE ============= */
@@ -93,7 +125,11 @@ html, body {
 /* ============= LANDING PAGE ============= */
 
 #loading {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
 }
 
 /* ============= LANDING PAGE ============= */

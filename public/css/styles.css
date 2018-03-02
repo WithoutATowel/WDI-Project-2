@@ -1,47 +1,83 @@
-/*
-Error: Invalid CSS after "$color-one: ": expected expression (e.g. 1px, bold), was ";"
-        on line 3 of sass/styles.scss
+/* =============== GENERAL ================ */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Mukta Mahee', sans-serif; }
 
-1: /* =============== GENERAL ================ *\/
-2: 
-3: $color-one: ;
-4: $color-two: ;
-5: $color-three: ;
-6: $color-four: ;
-7: 
-8: html, body {
+nav {
+  background-color: #557A95; }
 
-Backtrace:
-sass/styles.scss:3
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:1278:in `expected'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/script/lexer.rb:231:in `expected!'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/script/parser.rb:724:in `assert_expr'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/script/parser.rb:68:in `parse'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:1134:in `sass_script'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:642:in `variable'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:696:in `block_child'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:686:in `block_contents'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:137:in `stylesheet'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:41:in `parse'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/engine.rb:414:in `_to_tree'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/engine.rb:307:in `render_with_sourcemap'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:209:in `each'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:443:in `on_file_changed'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:320:in `block in watch'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/event/config.rb:23:in `call'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:115:in `_process_changes'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:19:in `block in loop_for'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop_for'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:84:in `_wait_for_changes'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:42:in `block in setup'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/internals/thread_pool.rb:6:in `block in add'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid CSS after \"$color-one: \": expected expression (e.g. 1px, bold), was \";\"\A         on line 3 of sass/styles.scss\A \A 1: /* =============== GENERAL ================ */\A 2: \A 3: $color-one: ;\A 4: $color-two: ;\A 5: $color-three: ;\A 6: $color-four: ;\A 7: \A 8: html, body {"; }
+h1 {
+  font-family: 'Arvo', serif; }
+
+li label {
+  position: relative !important;
+  top: -10px !important; }
+
+.italic {
+  font-style: italic; }
+
+.underline {
+  text-decoration: underline; }
+
+.btn {
+  text-transform: none;
+  background-color: #5D5C61;
+  border-radius: 5px; }
+
+.btn:hover, .btn:active {
+  background-color: #969599; }
+
+.btn:focus, input[type="submit"] {
+  outline: 0; }
+
+.container {
+  width: 80%; }
+
+/* ============= LANDING PAGE ============= */
+#landing {
+  overflow: hidden;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7)), url("../img/campfire.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  color: white;
+  text-align: center; }
+  #landing h1 {
+    margin-top: 10%;
+    font-size: 10em;
+    font-weight: bold; }
+  #landing ol {
+    display: inline-block; }
+  #landing li {
+    text-align: left; }
+  #landing .btn {
+    background-color: #1db954;
+    border-radius: 90px;
+    width: 350px; }
+  #landing .btn:hover {
+    background-color: #1ec95a; }
+  #landing #intro {
+    margin-top: 5%;
+    font-size: 1.25em;
+    font-weight: 500; }
+
+/* ============= MY PLAYLISTS ============= */
+/* ============= LANDING PAGE ============= */
+/* ============= LANDING PAGE ============= */
+#show-playlist .delete-playlist-link {
+  margin-left: 5px; }
+
+/* ============= LANDING PAGE ============= */
+/* ============= LANDING PAGE ============= */
+#loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 100vh; }
+
+/* ============= LANDING PAGE ============= */
+
+/*# sourceMappingURL=styles.css.map */

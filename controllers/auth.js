@@ -23,7 +23,7 @@ router.get('/spotify/callback',
     if(req.user.isNew) {
       res.redirect('/profile/download');
     } else {
-      req.flash('success', 'You have logged in!');
+      req.flash('success', 'Login successful');
       res.redirect('/playlists');
     }
 });
@@ -31,7 +31,7 @@ router.get('/spotify/callback',
 // Logout route
 router.get('/logout', isLoggedIn, function(req, res) {
     req.logOut();
-    req.flash('success', 'You have logged out!');
+    req.flash('success', 'You have logged out');
     res.render('index', { logout: true });
 });
 

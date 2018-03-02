@@ -5,28 +5,28 @@
     </head>
     <body id="my-playlists">
         <% include ../partials/nav %>
-        <% include ../partials/alerts %>
         <div class="container">
-            <h2>My Playlists</h2>
+            <h1>My Playlists</h1>
             <a class="waves-effect waves-light btn" href="/playlists/new">New Playlist</a>
-            <table>
+            <table class="highlight">
                 <thead>
                     <tr>
                         <th>Playlist Name</th>
-                        <th>Tracks</th>
+                        <th class="right-align">Tracks</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <% playlists.forEach(function(playlist, index) { %>
                         <tr>
-                            <td><%= (index + 1) + ". "%><a href="/playlists/<%= playlist.id %>"><%= playlist.name %></a></td>
-                            <td><%= playlist.songs.length %></td>
+                            <td><%= (index + 1) + ". " %><a href="/playlists/<%= playlist.id %>"><%= playlist.name %></a></td>
+                            <td class="right-align"><%= playlist.songs.length %></td>
                         </tr>
                     <% }) %>
                 </tbody>
             </table>
         </div>
         <%- include ../partials/footer.ejs %>
+        <%- include ../partials/alerts %>
     </body>
 </html>
