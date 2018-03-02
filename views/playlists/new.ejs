@@ -19,9 +19,9 @@
                             <option value="<%= user.id %>"><%= user.displayName %></option>
                         <% }) %>
                     </select>
-                    <p id="multi-select-error"></p>
                 <label>Members</label>
                 </div>
+                <p id="multi-select-error"></p>
                 <input type="checkbox" name="share" id="share-playlist">
                 <label for="share-playlist">Share playlist to members</label><br><br>
                 <input type="submit" class="waves-effect waves-light btn create-playlist" value="Create Playlist">
@@ -32,16 +32,15 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 $('select').material_select();
-                $('#new-playlist-form').on('change', function() {
+                $('#members').on('change', function() {
                     $("#multi-select-error").text("");
-                }
+                });
                 $('#new-playlist-form').on('submit', function(e) {
-                    e.preventDefault();
                     if ($("#members").val().length === 0) {
+                        e.preventDefault();
                         $("#multi-select-error").text("Choose one or more members to create a playlist.");
                     } else {
                         $('input[type="submit"]').attr("disabled", "disabled");
-                        $("#new-playlist-form").submit();
                     }
                 });
             });
