@@ -1,23 +1,32 @@
-<%- include ./partials/header.ejs %>
-<% include ./partials/alerts %>
-
-
-<div class="container">
-    <h1>PartyPlaylist</h1>
-    <div id="login">
-        <a href="/auth/spotify" class="btn btn-primary">Log in with Spotify</a>
-    </div>
-    <p>Tired of wondering whether your friends like your music? Automatically generate a playlist that everyone will like. It’s easy.</p>
-    <ol>
-        <li>Link PartyPlaylist to one or more Spotify accounts.</li>
-        <li>Select a group of users to create a playlist.</li>
-        <li>Enjoy.</li>
-    </ol>
-</div>
-
-<script> 
-    <% var logout = logout ? logout : false; %>
-    var logout = <%= logout %>
-</script>
-
-<%- include ./partials/footer.ejs %>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PartyPlaylist</title>
+        <%- include ./partials/header.ejs %>
+    </head>
+    <body id="landing">
+        <% include ./partials/alerts %>
+        <div class="container">
+            <h1>HARMONIZE</h1>
+            <div id="intro">
+                <div id="login">
+                    <a href="/auth/spotify" class="btn btn-primary valign-wrapper">Log in with Spotify</a>
+                </div>
+                <p>Tired of wondering whether your friends like your music?</br>
+                Automatically generate a playlist that everyone will like. It’s easy:</p>
+                <span>
+                    <ol>
+                        <li>Link Harmonize to your Spotify accounts.</li>
+                        <li>Select a group of users to create a playlist.</li>
+                        <li>Enjoy.</li>
+                    </ol>
+                </span>
+            </div>
+        </div>
+        <%- include ./partials/footer.ejs %>
+        <script> 
+            <% var logout = logout ? logout : false; %>
+            var logout = <%= logout %>
+        </script>
+    </body>
+</html>

@@ -1,31 +1,36 @@
-<%- include ../partials/header.ejs %>
-<% include ../partials/nav %>
-<% include ../partials/alerts %>
-
-<div class="container">
-    <h1><%= playlist.name %></h1>
-    <% var spotifyButtonText = (playlist.spotifyId === null) ? 'Save to Spotify' : 'View in Spotify' %>
-    <% var spotifyButtonLink = (playlist.spotifyId === null) ? ('/playlists/' + playlist.id + '/spotify') : ('http://open.spotify.com/user/' + user.spotifyId + '/playlist/' + playlist.spotifyId) %>
-    <a class="waves-effect waves-light btn save-to-spotify-link" href="<%= spotifyButtonLink %>" target="_blank"><%= spotifyButtonText %></a>
-    <a class="waves-effect waves-light btn delete-playlist-link" href="/playlists/<%= playlist.id %>">Delete</a>
-    <table>
-      <thead>
-        <tr>
-            <th>Track Name</th>
-            <th>Artist</th>
-            <th>Preview</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% playlist.songs.forEach(function(song, index) { %>
-          <tr>
-            <td><%= song.name %></td>
-            <td><%= artists[index].name %></td>
-            <td><audio controls src="<%= song.previewUrl %>"></audio></td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
-</div>
-
-<%- include ../partials/footer.ejs %>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include ../partials/header.ejs %>
+    </head>
+    <body id="show-playlist">
+        <% include ../partials/nav %>
+        <% include ../partials/alerts %>
+        <div class="container">
+            <h1><%= playlist.name %></h1>
+            <% var spotifyButtonText = (playlist.spotifyId === null) ? 'Save to Spotify' : 'View in Spotify' %>
+            <% var spotifyButtonLink = (playlist.spotifyId === null) ? ('/playlists/' + playlist.id + '/spotify') : ('http://open.spotify.com/user/' + user.spotifyId + '/playlist/' + playlist.spotifyId) %>
+            <a class="waves-effect waves-light btn save-to-spotify-link" href="<%= spotifyButtonLink %>" target="_blank"><%= spotifyButtonText %></a>
+            <a class="waves-effect waves-light btn delete-playlist-link" href="/playlists/<%= playlist.id %>">Delete</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Track Name</th>
+                        <th>Artist</th>
+                        <th>Preview</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% playlist.songs.forEach(function(song, index) { %>
+                        <tr>
+                            <td><%= song.name %></td>
+                            <td><%= artists[index].name %></td>
+                            <td><audio controls src="<%= song.previewUrl %>"></audio></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <%- include ../partials/footer.ejs %>
+    </body>
+</html>

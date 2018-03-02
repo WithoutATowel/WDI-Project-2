@@ -1,20 +1,25 @@
-<%- include ../partials/header.ejs %>
-<% include ../partials/nav %>
-<% include ../partials/alerts %>
-
-<div class="container">
-    <h1>Profile page</h1>
-    <p>Each PartyPlaylist profile has a public name to guarantee anonymity. This name will be visible to all PartyPlaylist users.</p>
-    <form method="POST" action="/profile" class="update-public-name">
-        <label for="">Public name:</label><br>
-        <input type="text" name="public-name" id="publicName" value="<%= user.displayName %>">
-        <input class="waves-effect waves-light btn" type="submit" value="Update">
-    </form>
-    <br>
-    <br>
-    <h5>Delete my PartyPlaylist profile!</h5>
-    <p>If you’re done using PartyPlaylist and want to delete your profile, click the button below. Just be aware that <span class="underline">deleting a profile is permanent.</span> There is no undo.</p>
-    <a href="/profile" class="waves-effect waves-light btn delete-profile-link">Delete Account</a>
-</div>
-
-<%- include ../partials/footer.ejs %>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include ../partials/header.ejs %>
+    </head>
+    <body id="profile">
+        <% include ../partials/nav %>
+        <% include ../partials/alerts %>
+        <div class="container">
+            <h1>Profile page</h1>
+            <p>Each PartyPlaylist profile has a public name to guarantee anonymity. This name will be visible to all PartyPlaylist users.</p>
+            <form method="POST" action="/profile" class="update-public-name">
+                <label for="">Public name:</label><br>
+                <input type="text" name="public-name" id="publicName" value="<%= user.displayName %>">
+                <input class="waves-effect waves-light btn" type="submit" value="Update">
+            </form>
+            <br>
+            <br>
+            <h5>Delete my PartyPlaylist profile!</h5>
+            <p>If you’re done using PartyPlaylist and want to delete your profile, click the button below. Just be aware that <span class="underline">deleting a profile is permanent.</span> There is no undo.</p>
+            <a href="/profile" class="waves-effect waves-light btn delete-profile-link">Delete Account</a>
+        </div>
+        <%- include ../partials/footer.ejs %>
+    </body>
+</html>

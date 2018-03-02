@@ -1,27 +1,32 @@
-<%- include ../partials/header.ejs %>
-<% include ../partials/nav %>
-<% include ../partials/alerts %>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include ../partials/header.ejs %>
+    </head>
+    <body id="my-playlists">
+        <% include ../partials/nav %>
+        <% include ../partials/alerts %>
+        <div class="container">
+            <h2>My Playlists</h2>
+            <a class="waves-effect waves-light btn" href="/playlists/new">New Playlist</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Playlist Name</th>
+                        <th>Tracks</th>
+                    </tr>
+                </thead>
 
-<div class="container">
-    <h2>My Playlists</h2>
-    <a class="waves-effect waves-light btn" href="/playlists/new">New Playlist</a>
-    <table>
-      <thead>
-        <tr>
-            <th>Playlist Name</th>
-            <th>Tracks</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% playlists.forEach(function(playlist, index) { %>
-          <tr>
-            <td><%= (index + 1) + ". "%><a href="/playlists/<%= playlist.id %>"><%= playlist.name %></a></td>
-            <td><%= playlist.songs.length %></td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
-</div>
-
-<%- include ../partials/footer.ejs %>
+                <tbody>
+                    <% playlists.forEach(function(playlist, index) { %>
+                        <tr>
+                            <td><%= (index + 1) + ". "%><a href="/playlists/<%= playlist.id %>"><%= playlist.name %></a></td>
+                            <td><%= playlist.songs.length %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <%- include ../partials/footer.ejs %>
+    </body>
+</html>

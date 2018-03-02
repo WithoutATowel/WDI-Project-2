@@ -1,8 +1,19 @@
-<%- include ../partials/header.ejs %>
-<h4>Analyzing your music preferences...</h4>
-<div class="progress">
-  <div class="indeterminate"></div>
-</div>
-<p>You're a complicated human being. This could take a minute.</p>
-<%- include ../partials/footer.ejs %>
-<script type="text/javascript" src="/js/download.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include ../partials/header.ejs %>
+    </head>
+    <body id="loading">
+        <% include ../partials/alerts %>
+        <div class="container">
+            <h4>Analyzing your music preferences...</h4>
+            <div class="progress">
+              <div class="indeterminate"></div>
+            </div>
+            <p>You're a complicated human being. This could take a minute.</p>
+            <%- include ../partials/footer.ejs %>
+            <script type="text/javascript" src="/js/download.js"></script>
+        </div>
+        <%- include ../partials/footer.ejs %>
+    </body>
+</html>

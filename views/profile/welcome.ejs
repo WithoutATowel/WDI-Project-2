@@ -1,19 +1,23 @@
-<%- include ../partials/header.ejs %>
-<% include ../partials/nav %>
-<% include ../partials/alerts %>
-
-<div class="container">
-    <h1>Welcome to PartyPlaylist</h1>
-    <p>Hopefully this isn't too forward, but we've taken the liberty of randomly generating a "public name" for you.</p>
-    <p>Your public name is how other PartyPlaylist users will find you, so make sure to share it with your friends. Or, if you don't like the one we made for you, I suppose you could throw it out and use something more recognizable. We don't mind. It's fine.</p>
-    <form method="POST" action="/profile" class="update-public-name">
-        <label for="">Public name:</label><br>
-        <input type="text" name="public-name" id="publicName" value="<%= user.displayName %>">
-        <input class="waves-effect waves-light btn" type="submit" value="Update">
-    </form>
-    <br>    
-    <h5>Now that's out of the way, why don't we <a href="/playlists/new">make a playlist</a>?</h5>
-    
-</div>
-
-<%- include ../partials/footer.ejs %>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include ../partials/header.ejs %>
+    </head>
+    <body id="welcome">
+        <% include ../partials/nav %>
+        <% include ../partials/alerts %>
+        <div class="container">
+            <h1>Welcome to PartyPlaylist</h1>
+            <p>Hopefully this isn't too forward, but we've taken the liberty of randomly generating a "public name" for you.</p>
+            <p>Your public name is how other PartyPlaylist users will find you, so make sure to share it with your friends. Or, if you don't like the one we made for you, I suppose you could throw it out and use something more recognizable. We don't mind. It's fine.</p>
+            <form method="POST" action="/profile" class="update-public-name">
+                <label for="">Public name:</label><br>
+                <input type="text" name="public-name" id="publicName" value="<%= user.displayName %>">
+                <input class="waves-effect waves-light btn" type="submit" value="Update">
+            </form>
+            <br>    
+            <h5>Now that's out of the way, why don't we <a href="/playlists/new">make a playlist</a>?</h5>
+        </div>
+        <%- include ../partials/footer.ejs %>
+    </body>
+</html>
