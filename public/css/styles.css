@@ -106,6 +106,9 @@ li label {
 
 /* ============= MY PLAYLISTS ============= */
 /* ============= LANDING PAGE ============= */
+#new-playlist #multi-select-error {
+  color: red; }
+
 /* ============= LANDING PAGE ============= */
 #show-playlist .container {
   padding-bottom: 2%; }
