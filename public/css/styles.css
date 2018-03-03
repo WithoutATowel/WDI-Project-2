@@ -52,7 +52,7 @@ li label {
 
 .container {
   width: 90%;
-  margin: 5% 0; }
+  margin: 5% auto; }
 
 .center {
   text-align: right; }
