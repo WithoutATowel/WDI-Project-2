@@ -13,7 +13,7 @@
                 <label for="playlist-name" data-error='Please enter a playlist name.'>Playlist name:</label><br>
                 <input type="text" name="name" id="playlist-name" class="validate" required="required"><br>
                 <div class="input-field col s12">
-                    <select name="members" id="members" class="validate" multiple required onchange="setCustomValidity('')">
+                    <select name="members" id="members" class="validate" multiple required>
                         <option value="" disabled selected>Select public user names</option>
                         <% users.forEach(function(user) { %>
                             <option value="<%= user.id %>"><%= user.displayName %></option>
@@ -22,29 +22,12 @@
                 <label>Members</label>
                 </div>
                 <p id="multi-select-error"></p>
-                <input type="checkbox" name="share" id="share-playlist">
-                <label for="share-playlist">Share playlist to members</label><br><br>
                 <input type="submit" class="waves-effect waves-light btn create-playlist" value="Create Playlist">
             </form>
         </div>
         <%- include ../partials/footer.ejs %>
         <% include ../partials/alerts %>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('select').material_select();
-                $('#members').on('change', function() {
-                    $("#multi-select-error").text("");
-                });
-                $('#new-playlist-form').on('submit', function(e) {
-                    if ($("#members").val().length < 2) {
-                        e.preventDefault();
-                        $("#multi-select-error").text("Choose one or more members to create a playlist.");
-                    } else {
-                        $('input[type="submit"]').attr("disabled", "disabled");
-                    }
-                });
-            });
-        </script>  
+        <script type="text/javascript" src='/js/new-playlist.js'></script>
     </body>
 </html>
 

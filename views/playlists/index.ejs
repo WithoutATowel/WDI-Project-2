@@ -8,7 +8,15 @@
         <div class="container">
             <h1>My Playlists</h1>
             <a class="waves-effect waves-light btn" href="/playlists/new">New Playlist</a>
-            <table class="highlight">
+            <% var tableDisplay, messageDisplay; %>
+            <% if(playlists.length === 0) { %>
+                <% tableDisplay = "none"; %>
+                <% messageDisplay = "block"; %>
+            <% } else { %>
+                <% tableDisplay = "table"; %>
+                <% messageDisplay = "none"; %>
+            <% } %>
+            <table class="highlight" style="display: <%= tableDisplay %>;">
                 <thead>
                     <tr>
                         <th>Playlist Name</th>
@@ -25,6 +33,7 @@
                     <% }) %>
                 </tbody>
             </table>
+            <p style="display: <%= messageDisplay %>;">Let's kick this party off. Go ahead and make a playlist!</p>
         </div>
         <%- include ../partials/footer.ejs %>
         <%- include ../partials/alerts %>

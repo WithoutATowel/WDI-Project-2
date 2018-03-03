@@ -1,16 +1,19 @@
 /* =============== GENERAL ================ */
 
-$color-one: #557A95;
+$color-one: #91344e;
 $color-two: #5D5C61;
-$color-three: #969599;
+$color-three: #28344E;
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Mukta Mahee', sans-serif;
+}
 
 body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: 0;
-    padding: 0;
-    font-family: 'Mukta Mahee', sans-serif;
     position: relative;
     min-height: 100vh;
 }
@@ -21,7 +24,7 @@ nav {
 
 footer {
     text-align: center;
-    background: #969599;
+    background: $color-three;
     color: white;
     align-self: flex-end;
     width: 100%;
@@ -70,6 +73,15 @@ li label {
     margin-top: 2.5%;
 }
 
+.icon {
+    height: 20px;
+    width: 20px;
+    margin: 10px 0 10px 5px;
+    margin-left: 5px;
+    margin-top: 10px;
+    filter: invert(100%);
+}
+
 #toast-container {
     top: -0.4%;
     left: 1%;
@@ -95,7 +107,7 @@ li label {
     .container {
         padding: 4% 4% 4% 4%;
         margin-top: 4%;
-        margin-bottom: 2.5%;
+        margin-bottom: 4%;
         background: white;
         border-radius: 3px;
     }
@@ -165,10 +177,12 @@ li label {
 /* ============= MY PLAYLISTS ============= */
 
 #my-playlists {
-
+    .container p {
+        margin-top: 5%;
+    }
 }
 
-/* ============= LANDING PAGE ============= */
+/* ============= NEW PLAYLIST ============= */
 
 #new-playlist {
     #multi-select-error {
@@ -176,7 +190,7 @@ li label {
     }
 }
 
-/* ============= LANDING PAGE ============= */
+/* ============= SHOW PLAYLIST ============= */
 
 #show-playlist {
     .container {
@@ -188,13 +202,13 @@ li label {
     }
 }
 
-/* ============= LANDING PAGE ============= */
+/* ============= PROFILE PAGE ============= */
 
 #profile {
 
 }
 
-/* ============= LANDING PAGE ============= */
+/* ============= LOADING PAGE ============= */
 
 #loading {
     display: flex;
@@ -204,7 +218,7 @@ li label {
     height: 100vh;
 }
 
-/* ============= LANDING PAGE ============= */
+/* ============= WELCOME PAGE ============= */
 
 #welcome {
 

@@ -10,7 +10,7 @@
             <p>Each Harmonize profile has a public name to guarantee anonymity. This name will be visible to all Harmonize users.</p>
             <form method="POST" action="/profile" class="update-public-name">
                 <label for="">Public name:</label><br>
-                <input type="text" name="public-name" id="publicName" value="<%= user.displayName %>">
+                <input type="text" name="public-name" id="publicName" value="<%= user.displayName %>" required>
                 <input class="waves-effect waves-light btn" type="submit" value="Update">
             </form>
             <br>

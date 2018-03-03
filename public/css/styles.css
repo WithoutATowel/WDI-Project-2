@@ -1,20 +1,22 @@
 /* =============== GENERAL ================ */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Mukta Mahee', sans-serif; }
+
 body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 0;
-  padding: 0;
-  font-family: 'Mukta Mahee', sans-serif;
   position: relative;
   min-height: 100vh; }
 
 nav {
-  background-color: #557A95; }
+  background-color: #91344e; }
 
 footer {
   text-align: center;
-  background: #969599;
+  background: #28344E;
   color: white;
   align-self: flex-end;
   width: 100%; }
@@ -43,7 +45,7 @@ li label {
   background-color: #5D5C61; }
 
 .btn:hover, .btn:active {
-  background-color: #969599; }
+  background-color: #28344E; }
 
 .btn:focus, input[type="submit"] {
   outline: 0; }
@@ -51,6 +53,14 @@ li label {
 .container {
   width: 80%;
   margin-top: 2.5%; }
+
+.icon {
+  height: 20px;
+  width: 20px;
+  margin: 10px 0 10px 5px;
+  margin-left: 5px;
+  margin-top: 10px;
+  filter: invert(100%); }
 
 #toast-container {
   top: -0.4%;
@@ -71,7 +81,7 @@ li label {
   .container {
     padding: 4% 4% 4% 4%;
     margin-top: 4%;
-    margin-bottom: 2.5%;
+    margin-bottom: 4%;
     background: white;
     border-radius: 3px; } }
 /* ============= LANDING PAGE ============= */
@@ -113,18 +123,21 @@ li label {
       margin-bottom: 0; } }
 
 /* ============= MY PLAYLISTS ============= */
-/* ============= LANDING PAGE ============= */
+#my-playlists .container p {
+  margin-top: 5%; }
+
+/* ============= NEW PLAYLIST ============= */
 #new-playlist #multi-select-error {
   color: #f44336; }
 
-/* ============= LANDING PAGE ============= */
+/* ============= SHOW PLAYLIST ============= */
 #show-playlist .container {
   padding-bottom: 2%; }
 #show-playlist .delete-playlist-link {
   margin-left: 5px; }
 
-/* ============= LANDING PAGE ============= */
-/* ============= LANDING PAGE ============= */
+/* ============= PROFILE PAGE ============= */
+/* ============= LOADING PAGE ============= */
 #loading {
   display: flex;
   flex-direction: column;
@@ -132,6 +145,6 @@ li label {
   text-align: center;
   height: 100vh; }
 
-/* ============= LANDING PAGE ============= */
+/* ============= WELCOME PAGE ============= */
 
 /*# sourceMappingURL=styles.css.map */
