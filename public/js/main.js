@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    // touchstart event is a workaround for a materialize bug. Closes the multiselect window.
+    $(document).on('touchstart', function(e) { $(document).trigger('click'); });
     $('select').material_select();
     $('.button-collapse').sideNav();
 
