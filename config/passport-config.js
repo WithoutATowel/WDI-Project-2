@@ -12,10 +12,12 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
+//http://localhost:3000
+
 passport.use(new SpotifyStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/spotify/callback"
+    callbackURL: "/auth/spotify/callback"
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
         var name = profile.displayName;
