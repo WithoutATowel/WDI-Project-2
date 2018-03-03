@@ -129,7 +129,7 @@ li label {
     text-align: center;
 
     h1 {
-        margin-top: 10%;
+        margin-top: 15%;
         font-size: 12vw;
         font-weight: bold;
     }
@@ -165,6 +165,12 @@ li label {
     }
 
     @media screen and (min-width: 600px) {
+        h1 {
+            margin-top: 10%;
+            font-size: 12vw;
+            font-weight: bold;
+        }
+
         .container {
             background: none;
             padding: 0;
