@@ -82,12 +82,6 @@ li label {
     filter: invert(100%);
 }
 
-#toast-container {
-    top: -0.4%;
-    left: 1%;
-    right: initial;
-}
-
 @media screen and (min-width: 600px) {
     body {
         background: linear-gradient(
@@ -110,6 +104,12 @@ li label {
         margin-bottom: 4%;
         background: white;
         border-radius: 3px;
+    }
+
+    #toast-container {
+        top: -0.4%;
+        left: 1%;
+        right: initial;
     }
 }
 

@@ -62,11 +62,6 @@ li label {
   margin-top: 10px;
   filter: invert(100%); }
 
-#toast-container {
-  top: -0.4%;
-  left: 1%;
-  right: initial; }
-
 @media screen and (min-width: 600px) {
   body {
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.7)), url("../img/concert.jpg");
@@ -83,7 +78,12 @@ li label {
     margin-top: 4%;
     margin-bottom: 4%;
     background: white;
-    border-radius: 3px; } }
+    border-radius: 3px; }
+
+  #toast-container {
+    top: -0.4%;
+    left: 1%;
+    right: initial; } }
 /* ============= LANDING PAGE ============= */
 #landing {
   overflow: hidden;
