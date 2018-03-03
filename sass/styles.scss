@@ -52,6 +52,10 @@ li label {
     border-radius: 5px;
 }
 
+.btn:visited {
+    background-color: $color-two;
+}
+
 .btn:hover, .btn:active {
     background-color: $color-three;
 }
@@ -64,6 +68,12 @@ li label {
 .container {
     width: 80%;
     margin-top: 2.5%;
+}
+
+#toast-container {
+    top: -1%;
+    left: 1%;
+    right: none;
 }
 
 @media screen and (min-width: 600px) {
