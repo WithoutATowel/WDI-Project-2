@@ -51,8 +51,11 @@ li label {
   outline: 0; }
 
 .container {
-  width: 80%;
-  margin-top: 2.5%; }
+  width: 90%;
+  margin: 5% 0; }
+
+.center {
+  text-align: right; }
 
 .icon {
   height: 20px;
@@ -74,11 +77,15 @@ li label {
     font-size: 6vw; }
 
   .container {
+    width: 80%;
     padding: 4% 4% 4% 4%;
     margin-top: 4%;
     margin-bottom: 4%;
     background: white;
     border-radius: 3px; }
+
+  .center {
+    text-align: center; }
 
   #toast-container {
     top: -0.4%;
