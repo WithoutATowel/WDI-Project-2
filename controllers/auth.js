@@ -11,7 +11,7 @@ router.get('/spotify',
     scope: ['user-read-email', 'user-read-private', 'user-top-read', 'user-read-recently-played', 'user-library-read', 'playlist-read-private', 'playlist-read-collaborative', 'playlist-modify-private'], 
     showDialog: false 
   }),
-  function(req, res){
+  function(req, res) {
     // ...
 });
 

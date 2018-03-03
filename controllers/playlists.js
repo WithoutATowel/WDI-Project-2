@@ -1,8 +1,5 @@
 var express = require('express');
 var db = require('../models');
-var Sequelize = require('sequelize');
-var config = require(__dirname + '/../config/config.json')['development'];
-var sequelize = new Sequelize(config.database, config.username, config.password, config);
 var passport = require('../config/passport-config');
 var request = require('request');
 var async = require('async');
@@ -55,7 +52,7 @@ router.post('/', isLoggedIn, function(req, res) {
             playlistId: playlist.id
         }).then(function() {
                 // Find songs that all users like and associate them with the playlist
-                sequelize.query(localQuery).then(function(results){
+                db.sequelize.query(localQuery).then(function(results){
                     results[0].forEach(function(song) {
                         db.playlists_songs.create({
                             playlistId: playlist.id,

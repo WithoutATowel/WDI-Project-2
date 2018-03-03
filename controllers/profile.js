@@ -1,8 +1,5 @@
 var express = require('express');
 var db = require('../models');
-var Sequelize = require('sequelize');
-var config = require(__dirname + '/../config/config.json')['development'];
-var sequelize = new Sequelize(config.database, config.username, config.password, config);
 var passport = require('../config/passport-config');
 var request = require('request');
 var async = require('async');
@@ -230,7 +227,7 @@ router.delete('/', isLoggedIn, function(req, res) {
                           'SELECT "playlistId" ' + 
                           'FROM users_playlists ' + 
                           'WHERE "userId" = ' + userId + ');';
-            sequelize.query(query).then(function(results) {
+            db.sequelize.query(query).then(function(results) {
                 callback();
             });
         }, function(callback) {
@@ -240,28 +237,28 @@ router.delete('/', isLoggedIn, function(req, res) {
                           'SELECT "playlistId" ' + 
                           'FROM users_playlists ' + 
                           'WHERE "userId" = ' + userId + ');';
-            sequelize.query(query).then(function(results) {
+            db.sequelize.query(query).then(function(results) {
                 callback();
             });
         }, function(callback) {
             // Delete records from users_playlists
             var query = 'DELETE FROM users_playlists ' + 
                         'WHERE "userId" = ' + userId + ';';
-            sequelize.query(query).then(function(results) {
+            db.sequelize.query(query).then(function(results) {
                 callback();
             });
         }, function(callback) {
             // Delete records from users_songs
             var query = 'DELETE FROM users_songs ' + 
                         'WHERE "userId" = ' + userId + ';';
-            sequelize.query(query).then(function(results) {
+            db.sequelize.query(query).then(function(results) {
                 callback();
             });
         }, function(callback) {
             // Delete user
             var query = 'DELETE FROM users ' + 
                         'WHERE id = ' + userId + ';';
-            sequelize.query(query).then(function(results) {
+            db.sequelize.query(query).then(function(results) {
                 callback();
             });
         }], function(err, results) {
