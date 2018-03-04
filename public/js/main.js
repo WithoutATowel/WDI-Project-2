@@ -1,6 +1,5 @@
 $(document).ready(function() {
     // touchstart event is a workaround for a materialize bug. Closes the multiselect window.
-    $(document).on('touchstart', function(e) { $(document).trigger('click'); });
     $('select').material_select();
     $('.button-collapse').sideNav();
 
@@ -60,5 +59,13 @@ $(document).ready(function() {
     if('logout' in window && logout) {
         $('body').append('<iframe src="https://www.spotify.com/us/logout/" style="display:none;" width="1px" height="1px"></iframe>');
     }
+
+    $(document).on('touchstart', function (e) {
+        let target = $(e.target);
+        if (!target.is("span")) { //checking if you are tapping on items in multiple select or not
+            $(document).trigger('click'); //if you are tapping outside multiple select close it
+            $(':focus').blur(); //focus out for multiple select so you can choose another or the same (in case you have more multiple selects on page)
+        }
+    });
 
 });
