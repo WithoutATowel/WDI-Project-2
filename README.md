@@ -9,13 +9,13 @@ The top level need that Harmonize fulfills is that it makes it easy to put on mu
 2. As a returning user I want to sign into the app.
 3. As a signed in user I want to 
     1. View my profile.
-      * After clicking the “profile” tab.
-      * After signing up.
+        * After clicking the “profile” tab.
+        * After signing up.
     2. Edit my profile.
     3. Delete my profile.
     4. View my playlists.
-      * After signing in.
-      * When coming back to the website but still signed in.
+        * After signing in.
+        * When coming back to the website but still signed in.
     5. Generate a new playlist
     6. Save a playlist to Spotify
     7. Delete a playlist
