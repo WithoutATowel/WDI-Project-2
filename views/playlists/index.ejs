@@ -8,6 +8,7 @@
         <div class='container'>
             <h1>My Playlists</h1>
             <a class='waves-effect waves-light btn' href='/playlists/new'>New Playlist</a>
+            <% // Check whether playlists exist. If so, show a table. If not, prompt the user to create a list. %>
             <% var tableDisplay, messageDisplay; %>
             <% if(playlists.length === 0) { %>
                 <% tableDisplay = 'none'; %>

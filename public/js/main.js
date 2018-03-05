@@ -1,8 +1,9 @@
 $(document).ready(function() {
-    // touchstart event is a workaround for a materialize bug. Closes the multiselect window.
+    // Initialize Materialize "multiple select" inputs and sideNav for mobile. 
     $('select').material_select();
     $('.button-collapse').sideNav();
 
+    // Event handler for the "Export to Spotify" button on the "view playlist" page
     $('.save-to-spotify-link').click(function(event) {
         if ($(this).attr('href').search('open') !== -1) {
             // Button links to Spotify, so do nothing. Let the click go through.
@@ -20,6 +21,7 @@ $(document).ready(function() {
         }
     });
 
+    // Event handler for the "Delete playlist" button on the "view playlist" page
     $('.delete-playlist-link').click(function(event) {
         event.preventDefault();
         // Ping DELETE /playlists/:id route then redirect to /playlist
@@ -32,6 +34,7 @@ $(document).ready(function() {
         });
     });
 
+    // Event handler for the "Update" button on the profile page
     $('.update-public-name').submit(function(event) {
         event.preventDefault();
         // Ping PUT /profile route with form data
@@ -45,6 +48,7 @@ $(document).ready(function() {
         });
     });
 
+    // Event handler for the "Delete" button on the profile page
     $('.delete-profile-link').click(function(event) {
         event.preventDefault();
         // Ping DELETE /profile route then redirect to logout page
@@ -56,10 +60,14 @@ $(document).ready(function() {
         });
     });
 
+    // On page load, check to see if the user just logged out of Harmonize. If so, use an iframe to log them out of Spotify.
+    // Not positive this is best practice, but without it you aren't prompted for a password when logging back into Harmonize.
+    // I.e. you log out, then hitting "log in" takes you straight through without needing to type in a password.
     if('logout' in window && logout) {
         $('body').append('<iframe src="https://www.spotify.com/us/logout/" style="display:none;" width="1px" height="1px"></iframe>');
     }
 
+    // This fixes a bug with Materialize's select multiple menus on Mobile. Without it, you can't click out of the select menu.
     $(document).on('touchstart', function (e) {
         let target = $(e.target);
         if (!target.is('span')) { //checking if you are tapping on items in multiple select or not

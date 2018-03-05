@@ -6,7 +6,14 @@ var request = require('request');
 var async = require('async');
 var isLoggedIn = require('../middleware/is-logged-in');
 
-var query = 'SELECT songs.id, songs.popularity, count(users_songs."userId") AS user_count FROM users_songs JOIN songs ON songs.id = users_songs."songId" JOIN artists ON songs."artistId" = artists.id WHERE users_songs."userId" IN ($USERS) GROUP BY 1,2 HAVING count(users_songs."userId") > 1';
+var query = 'SELECT songs.id, ' + 
+                'songs.popularity, ' +
+                'count(users_songs."userId") AS user_count ' + 
+            'FROM users_songs ' + 
+            'JOIN songs ON songs.id = users_songs."songId" ' + 
+            'WHERE users_songs."userId" IN ($USERS) ' + 
+            'GROUP BY 1,2 ' + 
+            'HAVING count(users_songs."userId") > 1';
 
 // GET /playlists view all playlists 
 router.get('/', isLoggedIn, function(req, res) {
@@ -24,7 +31,7 @@ router.get('/', isLoggedIn, function(req, res) {
                 next(false, playlist);
             });
         }, function(error, playlists) {
-            res.render('playlists/index', { playlists: playlists});
+            res.render('playlists/index', { playlists: playlists });
         });
     });
 });
@@ -46,12 +53,13 @@ router.post('/', isLoggedIn, function(req, res) {
     db.playlist.create({
         name: req.body.name
     }).then(function(playlist){
-        // Associate playlist with user
+        // Associate the playlist with the user
         db.users_playlists.create({
             userId: req.user.id,
             playlistId: playlist.id
         }).then(function() {
-                // Find songs that all users like and associate them with the playlist
+                // Find songs that all included users like using the query defined earlier, 
+                // and associate songs with the playlist
                 db.sequelize.query(localQuery).then(function(results){
                     results[0].forEach(function(song) {
                         db.playlists_songs.create({
@@ -60,6 +68,7 @@ router.post('/', isLoggedIn, function(req, res) {
                         });
                     });
                 }).then(function() {
+                    // This is a POST route, so update the method before redirecting
                     req.method = 'GET';
                     res.redirect('/playlists/' + playlist.id);
                 });
@@ -87,11 +96,6 @@ router.get('/:id', isLoggedIn, function(req, res) {
     });
 });
 
-// PUT /playlists/:id edit the name of a playlist
-router.put('/:id', isLoggedIn, function(req, res) {
-    res.redirect('/playlists' + req.params.id);
-});
-
 // POST /playlists/:id/spotify save a playlist to Spotify
 router.post('/:id/spotify', isLoggedIn, function(req, res) {
     var userId = req.user.id;
@@ -101,6 +105,9 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
     var spotifyPlaylistId = '';
     var result = '';
 
+    // This function attempts to create a playlist, then fires a callback (to async) so the next task can 
+    // be handled. This function will be called a second time to account for cases where the user's Spotify access token
+    // has expired and the first playlist creation attempt failed. Hence it checks the "result" variable before proceeding.
     function createPlaylist(callback) {
         if (result === 'success') {
             // The playlist has already created successfully. Call the next function.
@@ -141,12 +148,14 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
         }
     }
 
+    // If playlist creation failed, we need to refresh the user's credentials. This gets called after the first
+    // playlist creation attempt, and only refreshes credentials if the attempt failed.
     function refreshCredentials(callback) {
         if (result !== 'first playlist creation attempt failed') {
             // Playlist was created. No need to refresh credentials.
             callback();
         } else {
-            // Playlist was not created. Refresh credentials and try again.
+            // Playlist was not created. Refresh credentials and fire callback to try again.
             var userAuth = 'grant_type=refresh_token&refresh_token=' + req.user.refreshToken;
             var appAuth = Buffer.from(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET).toString('base64');
             var authRefreshOptions = {
@@ -176,19 +185,23 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
         }
     }
     
+    // Playlist has now been created in the user's Spotify account. This function adds the relevant songs
+    // to that playlist.
     function addSongsToPlaylist(callback) {
-        // Retrieve the playlists songs from the database and prepare to send them through to the Spotify API
+        // Retrieve the playlist's songs from the database and prepare to send them through to the Spotify API
         db.playlist.findOne({
             where: { id: playlistId },
             include: [db.song]
         }).then(function(playlist) {
             // Groom songs to the proper format and send to Spotify via the API.
-            // Spotify only accepts groups of 100 songs at max, and wants them as a weird string.
+            // Spotify only accepts groups of 100 songs at max, so string formatting and API calls are different
+            // depending on whether or not the songs need to be grouped or can be sent with a single call.
             var songs = playlist.songs.map((song) => song.spotifyId);
             var songGroups = [];
             var grouped = false;
             if (songs.length > 100) {
                 grouped = true;
+                // Split song list into groups of 100
                 for (var i = 0; i < Math.ceil(songs.length / 100); i++) {
                     songGroups[i] = songs.slice(i * 100, ((i + 1) * 100));
                 }
@@ -203,7 +216,7 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
                 },
                 body: ''
             };
-            // Next steps depend on whether or not we need to group the songs into batches
+            // Next steps depend on whether or not we've had to group the songs into batches
             if (grouped) {
                 // Format song groups like '{ "uris": ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh"]}'
                 for (var j = 0; j < songGroups.length; j++) {
@@ -230,6 +243,7 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
         }); 
     }     
     
+    // Try to create a playlist. If failed, refresh credentials and try again. Then add songs to playlist.
     async.series([createPlaylist, refreshCredentials, createPlaylist, addSongsToPlaylist], function(err, results) {
         req.flash('success', 'Playlist exported to Spotify!');
         res.send('success');

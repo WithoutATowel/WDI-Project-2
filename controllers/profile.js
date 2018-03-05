@@ -6,7 +6,7 @@ var async = require('async');
 var isLoggedIn = require('../middleware/is-logged-in');
 var router = express.Router();
 
-
+// Helper function to save songs returned by the Spotify API to the database and associate with a user. 
 function storeTracks(array, user) {
     return new Promise(function(resolve, reject) {  
         async.each(array, function(track, callback){
@@ -133,9 +133,9 @@ router.get('/download', isLoggedIn, function(req,res) {
                         });
                     }, function(err, n) {
                         // Now we need to download and store songs from each playlist. So, we're going to start by 
-                        // looping through the playlistUri array. This loop can be asynchronous since downloading the songs for
-                        // one playlist is independent of downloading another's. But we need to wait on the callback for async.parallel
-                        // until all playlists have been downloaded.
+                        // looping through the playlistUri array. This loop can be asynchronous since downloading the songs for a given
+                        // playlist is independent of downloading another's. But we need to wait on the callback for async.parallel
+                        // until ALL playlists have been downloaded, so async.each() is needed vs. a normal Array.forEach().
                         async.each(playlistUris, 
                             function(playlistUri, cb) {
                                 options.url = playlistUri;
@@ -159,7 +159,7 @@ router.get('/download', isLoggedIn, function(req,res) {
                                     }
                                 );
                             }, function(err, n) {
-                                callback(); // finishes parallel item
+                                callback(); // finishes parallel item when all playlists have been downloaded
                             }
                         );
                     }
@@ -175,9 +175,11 @@ router.get('/download', isLoggedIn, function(req,res) {
     );
 });
 
-// GET /profile/ready
+// GET /profile/ready is a route that client-side JavaScript can ping from the "loading" page to check
+// whether or not to redirect to the welcome page.
 router.get('/ready', isLoggedIn, function(req, res) {
     db.user.findById(req.user.id).then(function(user) {
+        // Check whether song data has been fully downloaded for the user, and let the client-side AJAX know
         if (user.songDataDownloaded) {
             res.send('Download complete');
         } else {
@@ -186,12 +188,12 @@ router.get('/ready', isLoggedIn, function(req, res) {
     });
 });
 
-// GET /profile/welcome
+// GET /profile/welcome shows a one time welcome screen that explains "Public names" to the user
 router.get('/welcome', isLoggedIn, function(req, res) {
     res.render('profile/welcome', { user: req.user });
 });
 
-// PUT /profile
+// PUT /profile allows users to update their public names
 router.put('/', isLoggedIn, function(req, res) {
     db.user.update({
         displayName: req.body.publicName
@@ -213,6 +215,8 @@ router.put('/', isLoggedIn, function(req, res) {
 // DELETE /profile
 router.delete('/', isLoggedIn, function(req, res) {
     var userId = req.user.id;
+    // Use async.series to delete all references to the user throughout the database, including playlists
+    // created by the user.
     async.series([
         function(callback) {
             // Delete records from playlists_songs for owned playlists

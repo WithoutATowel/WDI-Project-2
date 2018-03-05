@@ -19,7 +19,8 @@ router.get('/spotify',
 router.get('/spotify/callback',
     passport.authenticate('spotify', { failureRedirect: '/' }),
     function(req, res) {
-        // Successful authentication, redirect home.
+        // Successful authentication, redirect to 'download' route to retrieve song data for new users,
+        // or to the playlist page for returning users.
         if(req.user.isNew) {
             res.redirect('/profile/download');
         } else {
