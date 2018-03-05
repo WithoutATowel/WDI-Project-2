@@ -71,7 +71,7 @@ footer a {
 
 @media screen and (min-width: 600px) {
   body {
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7)), url('../img/concert.jpg');
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7)), url("../img/concert.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -98,7 +98,7 @@ footer a {
 /* ============= LANDING PAGE ============= */
 #landing {
   overflow: hidden;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7)), url('../img/campfire.jpg');
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7)), url("../img/campfire.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -151,7 +151,6 @@ footer a {
 #show-playlist .delete-playlist-link {
   margin-left: 5px; }
 
-/* ============= PROFILE PAGE ============= */
 /* ============= LOADING PAGE ============= */
 #loading {
   display: flex;
@@ -159,7 +158,5 @@ footer a {
   justify-content: center;
   text-align: center;
   height: 100vh; }
-
-/* ============= WELCOME PAGE ============= */
 
 /*# sourceMappingURL=styles.css.map */

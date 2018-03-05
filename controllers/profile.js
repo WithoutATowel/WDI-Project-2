@@ -51,11 +51,6 @@ function storeTracks(array, user) {
     });
 }
 
-// GET /fake
-router.get('/fake', function(req, res) {
-    res.render('profile/loading');
-});
-
 // GET /profile 
 router.get('/', isLoggedIn, function(req, res) {
     res.render('profile/index', { user: req.user });
