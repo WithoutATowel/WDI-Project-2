@@ -5,7 +5,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('./config/passport-config');
-var isLoggedIn = require('./middleware/isLoggedIn');
+var isLoggedIn = require('./middleware/is-logged-in');
 var app = express();
 
 

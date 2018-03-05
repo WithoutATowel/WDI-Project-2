@@ -1,23 +1,20 @@
 var passport = require('passport');
 var SpotifyStrategy = require('passport-spotify').Strategy;
 var db = require('../models');
-var async = require('async');
 var request = require('request');
 
 passport.serializeUser(function(user, done) {
-  done(null, user);
+    done(null, user);
 });
 
 passport.deserializeUser(function(obj, done) {
-  done(null, obj);
+    done(null, obj);
 });
-
-//http://localhost:3000
 
 passport.use(new SpotifyStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "/auth/spotify/callback"
+    callbackURL: '/auth/spotify/callback'
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
         var name = profile.displayName;

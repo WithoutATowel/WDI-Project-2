@@ -8,10 +8,10 @@ $(document).ready(function() {
             // Button links to Spotify, so do nothing. Let the click go through.
         } else {
             event.preventDefault();
-            $(this).attr("disabled", "disabled");
+            $(this).attr('disabled', 'disabled');
             // Ping GET playlists/:id/spotify to export
             $.ajax({
-                method: "POST",
+                method: 'POST',
                 url: $(this).attr('href')
             }).done(function() {
                 // Reload the page to show flash message
@@ -24,7 +24,7 @@ $(document).ready(function() {
         event.preventDefault();
         // Ping DELETE /playlists/:id route then redirect to /playlist
         $.ajax({
-            method: "DELETE",
+            method: 'DELETE',
             url: $(this).attr('href')
         }).done(function(){
             // Reload the page to remove playlist from table
@@ -36,9 +36,9 @@ $(document).ready(function() {
         event.preventDefault();
         // Ping PUT /profile route with form data
         $.ajax({
-            method: "PUT",
+            method: 'PUT',
             url: $(this).attr('action'),
-            data: { publicName: $('#publicName').val() }
+            data: { publicName: $('#public-name').val() }
         }).done(function() {
             // Reload the page to show flash message
             window.location.reload();
@@ -49,7 +49,7 @@ $(document).ready(function() {
         event.preventDefault();
         // Ping DELETE /profile route then redirect to logout page
         $.ajax({
-            method: "DELETE",
+            method: 'DELETE',
             url: $(this).attr('href')
         }).done(function(){
             window.location = '/auth/logout';
@@ -62,7 +62,7 @@ $(document).ready(function() {
 
     $(document).on('touchstart', function (e) {
         let target = $(e.target);
-        if (!target.is("span")) { //checking if you are tapping on items in multiple select or not
+        if (!target.is('span')) { //checking if you are tapping on items in multiple select or not
             $(document).trigger('click'); //if you are tapping outside multiple select close it
             $(':focus').blur(); //focus out for multiple select so you can choose another or the same (in case you have more multiple selects on page)
         }

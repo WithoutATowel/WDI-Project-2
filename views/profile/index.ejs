@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
     <head>
         <%- include ../partials/header.ejs %>
     </head>
-    <body id="profile">
+    <body id='profile'>
         <% include ../partials/nav %>
-        <div class="container">
+        <div class='container'>
             <h1>My Profile</h1>
             <p>Each Harmonize profile has a public name to guarantee anonymity. This name will be visible to all Harmonize users.</p>
-            <form method="POST" action="/profile" class="update-public-name">
-                <label for="">Public name:</label><br>
-                <input type="text" name="public-name" id="publicName" value="<%= user.displayName %>" required>
-                <input class="waves-effect waves-light btn" type="submit" value="Update">
+            <form method='POST' action='/profile' class='update-public-name'>
+                <label for='public-name'>Public name:</label><br>
+                <input type='text' name='public-name' id='public-name' value='<%= user.displayName %>' required>
+                <input class='waves-effect waves-light btn' type='submit' value='Update'>
             </form>
             <br>
             <br>
             <h5>Delete my profile</h5>
-            <p>If you’re done using Harmonize and want to delete your profile, click the button below. Just be aware that <span class="underline">deleting a profile is permanent</span>.</p>
-            <a href="/profile" class="waves-effect waves-light btn delete-profile-link">Delete Account</a>
+            <p>If you’re done using Harmonize and want to delete your profile, click the button below. Just be aware that <span class='underline'>deleting a profile is permanent</span>.</p>
+            <a href='/profile' class='waves-effect waves-light btn delete-profile-link'>Delete Account</a>
         </div>
         <%- include ../partials/footer.ejs %>
         <% include ../partials/alerts %>

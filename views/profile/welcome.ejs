@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
     <head>
         <%- include ../partials/header.ejs %>
     </head>
-    <body id="welcome">
+    <body id='welcome'>
         <% include ../partials/nav %>
-        <div class="container">
+        <div class='container'>
             <h1>Welcome to Harmonize</h1>
             <p>Hopefully this isn't too forward, but we've taken the liberty of randomly generating a "public name" for you.</p>
-            <p>Your public name is how other Harmonize users will find you, so make sure to share it with your friends. Or, if you don't like the one we made, you <span class="italic">could</span> throw it out and use something more recognizable. We don't mind. It's fine.</p>
-            <form method="POST" action="/profile" class="update-public-name">
-                <label for="">Public name:</label><br>
-                <input type="text" name="public-name" id="publicName" value="<%= user.displayName %>">
-                <input class="waves-effect waves-light btn" type="submit" value="Update">
+            <p>Your public name is how other Harmonize users will find you, so make sure to share it with your friends. Or, if you don't like the one we made, you <span class='italic'>could</span> throw it out and use something more recognizable. We don't mind. It's fine.</p>
+            <form method='POST' action='/profile' class='update-public-name'>
+                <label for=''>Public name:</label><br>
+                <input type='text' name='public-name' id='public-name' value='<%= user.displayName %>'>
+                <input class='waves-effect waves-light btn' type='submit' value='Update'>
             </form>
             <br>    
-            <h5>Now that's out of the way, why don't we <a href="/playlists/new">make a playlist</a>?</h5>
+            <h5>Now that's out of the way, why don't we <a href='/playlists/new'>make a playlist</a>?</h5>
         </div>
         <%- include ../partials/footer.ejs %>
         <% include ../partials/alerts %>

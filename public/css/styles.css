@@ -51,7 +51,7 @@ footer a {
 .btn:hover, .btn:active {
   background-color: #28344E; }
 
-.btn:focus, input[type="submit"] {
+.btn:focus, input[type='submit'] {
   outline: 0; }
 
 .container {
@@ -71,7 +71,7 @@ footer a {
 
 @media screen and (min-width: 600px) {
   body {
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7)), url("../img/concert.jpg");
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7)), url('../img/concert.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -98,7 +98,7 @@ footer a {
 /* ============= LANDING PAGE ============= */
 #landing {
   overflow: hidden;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7)), url("../img/campfire.jpg");
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7)), url('../img/campfire.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

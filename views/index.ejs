@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
     <head>
         <%- include ./partials/header.ejs %>
     </head>
-    <body id="landing">
-        <div class="container">
+    <body id='landing'>
+        <div class='container'>
             <h1>HARMONIZE</h1>
-            <div id="intro">
-                <div id="login">
-                    <a href="/auth/spotify" class="btn btn-primary valign-wrapper">Log in with Spotify</a>
+            <div id='intro'>
+                <div id='login'>
+                    <a href='/auth/spotify' class='btn btn-primary valign-wrapper'>Log in with Spotify</a>
                 </div>
-                <p>Tired of wondering whether your friends like your music?<br class="hide-on-small-only">
+                <p>Tired of wondering whether your friends like your music?<br class='hide-on-small-only'>
                 Automatically generate a playlist that the whole group will enjoy. It’s easy:</p>
                 <span>
                     <ol>
@@ -22,9 +22,9 @@
             </div>
         </div>
         <!-- <%- include ./partials/footer.ejs %> -->
-        <script src="//code.jquery.com/jquery.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-        <script type="text/javascript" src="/js/main.js"></script>
+        <script src='//code.jquery.com/jquery.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js'></script>
+        <script type='text/javascript' src='/js/main.js'></script>
         <script> 
             <% var logout = logout ? logout : false; %>
             var logout = <%= logout %>

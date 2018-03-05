@@ -1,39 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
     <head>
         <%- include ../partials/header.ejs %>
     </head>
-    <body id="my-playlists">
+    <body id='my-playlists'>
         <% include ../partials/nav %>
-        <div class="container">
+        <div class='container'>
             <h1>My Playlists</h1>
-            <a class="waves-effect waves-light btn" href="/playlists/new">New Playlist</a>
+            <a class='waves-effect waves-light btn' href='/playlists/new'>New Playlist</a>
             <% var tableDisplay, messageDisplay; %>
             <% if(playlists.length === 0) { %>
-                <% tableDisplay = "none"; %>
-                <% messageDisplay = "block"; %>
+                <% tableDisplay = 'none'; %>
+                <% messageDisplay = 'block'; %>
             <% } else { %>
-                <% tableDisplay = "table"; %>
-                <% messageDisplay = "none"; %>
+                <% tableDisplay = 'table'; %>
+                <% messageDisplay = 'none'; %>
             <% } %>
-            <table class="highlight" style="display: <%= tableDisplay %>;">
+            <table class='highlight' style='display: <%= tableDisplay %>;'>
                 <thead>
                     <tr>
                         <th>Playlist Name</th>
-                        <th class="right-align">Tracks</th>
+                        <th class='right-align'>Tracks</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <% playlists.forEach(function(playlist, index) { %>
                         <tr>
-                            <td><%= (index + 1) + ". " %><a href="/playlists/<%= playlist.id %>"><%= playlist.name %></a></td>
-                            <td class="right-align"><%= playlist.songs.length %></td>
+                            <td><%= (index + 1) + '. ' %><a href='/playlists/<%= playlist.id %>'><%= playlist.name %></a></td>
+                            <td class='right-align'><%= playlist.songs.length %></td>
                         </tr>
                     <% }) %>
                 </tbody>
             </table>
-            <p style="display: <%= messageDisplay %>;">Let's kick this party off. Go ahead and make a playlist!</p>
+            <p style='display: <%= messageDisplay %>;'>Let's kick this party off. Go ahead and make a playlist!</p>
         </div>
         <%- include ../partials/footer.ejs %>
         <%- include ../partials/alerts %>

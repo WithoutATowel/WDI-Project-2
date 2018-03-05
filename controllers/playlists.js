@@ -1,10 +1,10 @@
 var express = require('express');
+var router = express.Router();
 var db = require('../models');
 var passport = require('../config/passport-config');
 var request = require('request');
 var async = require('async');
-var isLoggedIn = require('../middleware/isLoggedIn');
-var router = express.Router();
+var isLoggedIn = require('../middleware/is-logged-in');
 
 var query = 'SELECT songs.id, songs.popularity, count(users_songs."userId") AS user_count FROM users_songs JOIN songs ON songs.id = users_songs."songId" JOIN artists ON songs."artistId" = artists.id WHERE users_songs."userId" IN ($USERS) GROUP BY 1,2 HAVING count(users_songs."userId") > 1';
 
@@ -102,7 +102,7 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
     var result = '';
 
     function createPlaylist(callback) {
-        if (result === "success") {
+        if (result === 'success') {
             // The playlist has already created successfully. Call the next function.
             callback();
         } else {
@@ -113,8 +113,8 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
                     public: false 
                 };
                 var playlistCreateOptions = {
-                    method: "POST",
-                    url: "https://api.spotify.com/v1/users/" + userSpotifyId + "/playlists",
+                    method: 'POST',
+                    url: 'https://api.spotify.com/v1/users/' + userSpotifyId + '/playlists',
                     headers: { 'Authorization': 'Bearer ' + accessToken }, 
                     body: newSpotifyPlaylist,
                     json: true
@@ -122,11 +122,11 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
                 request(playlistCreateOptions, function(error, response, body) {
                     if(body.error && body.error.status === 401) {
                         // Creation failed. Pass message so that refreshCredentials() can do its thing.
-                        result = "first playlist creation attempt failed";
+                        result = 'first playlist creation attempt failed';
                         callback();
                     } else {
                         // Playlist successfully created! Store the playlist's spotifyId in the database.
-                        result = "success";
+                        result = 'success';
                         spotifyPlaylistId = body.id;
                         db.playlist.update({
                             spotifyId: spotifyPlaylistId
@@ -142,7 +142,7 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
     }
 
     function refreshCredentials(callback) {
-        if (result !== "first playlist creation attempt failed") {
+        if (result !== 'first playlist creation attempt failed') {
             // Playlist was created. No need to refresh credentials.
             callback();
         } else {
@@ -260,19 +260,6 @@ router.delete('/:id', isLoggedIn, function(req, res) {
 });
 
 module.exports = router;
-
-
-// API endpoint tester
-// var options = {
-//     url: 'https://api.spotify.com/v1/me/tracks?limit=50',
-//     headers: {
-//         'Authorization': 'Bearer ' + req.user.accessToken
-//     }
-// };
-// console.log(options);
-// request(options, function(error, response, body) {
-//     res.send(body);
-// })
 
 
     

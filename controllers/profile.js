@@ -3,7 +3,7 @@ var db = require('../models');
 var passport = require('../config/passport-config');
 var request = require('request');
 var async = require('async');
-var isLoggedIn = require('../middleware/isLoggedIn');
+var isLoggedIn = require('../middleware/is-logged-in');
 var router = express.Router();
 
 
@@ -46,7 +46,7 @@ function storeTracks(array, user) {
                 callback();
             }
         }, function() {
-            resolve("Stuff worked!");
+            resolve('Stuff worked!');
         });
     });
 }

@@ -1,37 +1,37 @@
-<!-- oninvalid="this.setCustomValidity()" oninput="setCustomValidity('')" -->
+<!-- oninvalid='this.setCustomValidity()' oninput='setCustomValidity('')' -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
     <head>
         <%- include ../partials/header.ejs %>
     </head>
-    <body id="new-playlist">
+    <body id='new-playlist'>
         <% include ../partials/nav %>
-        <div class="container">
+        <div class='container'>
             <h1>New Playlist</h1>
-            <form method="POST" action="/playlists" id="new-playlist-form">
-                <label for="playlist-name" data-error='Please enter a playlist name.'>Playlist name:</label><br>
-                <input type="text" name="name" id="playlist-name" class="validate" required="required"><br>
-                <div class="input-field col s12">
-                    <select name="members" id="members" class="validate" multiple required>
-                        <option value="" disabled selected>Select public user names</option>
+            <form method='POST' action='/playlists' id='new-playlist-form'>
+                <label for='playlist-name' data-error='Please enter a playlist name.'>Playlist name:</label><br>
+                <input type='text' name='name' id='playlist-name' class='validate' required='required'><br>
+                <div class='input-field col s12'>
+                    <select name='members' id='members' class='validate' multiple required>
+                        <option value='' disabled selected>Select public user names</option>
                         <% users.forEach(function(user) { %>
-                            <option value="<%= user.id %>"><%= user.displayName %></option>
+                            <option value='<%= user.id %>'><%= user.displayName %></option>
                         <% }) %>
                     </select>
                 <label>Members</label>
                 </div>
-                <p id="multi-select-error"></p>
-                <input type="submit" class="waves-effect waves-light btn create-playlist" value="Create Playlist">
+                <p id='multi-select-error'></p>
+                <input type='submit' class='waves-effect waves-light btn create-playlist' value='Create Playlist'>
             </form>
         </div>
         <%- include ../partials/footer.ejs %>
         <% include ../partials/alerts %>
-        <script type="text/javascript" src='/js/new-playlist.js'></script>
+        <script type='text/javascript' src='/js/new-playlist.js'></script>
     </body>
 </html>
 
 <!-- // var multiselect = document.getElementById('members');
-// document.getElementById('playlist-name').setCustomValidity("WOOOO TESTING.");
+// document.getElementById('playlist-name').setCustomValidity('WOOOO TESTING.');
 // document.getElementById('playlist-name').checkValidity();
 // multiselect.checkValidity(); -->
