@@ -66,7 +66,7 @@ router.get('/download', isLoggedIn, function(req,res) {
             'Authorization': 'Bearer ' + user.accessToken
         }
     };
-    async.waterfall(
+    async.parallel(
         [
             function(callback) {
                 // Get and store favorite songs from the past several years
@@ -116,6 +116,8 @@ router.get('/download', isLoggedIn, function(req,res) {
             }, function(callback) {
                 // Get URLs for all of a user's playlists. Max 50 per request and user may have more, 
                 // so we're going to need a loop. And a bigger boat.
+                // This loop needs to be synchronous (not go to the next iteration until the first one is finished) because we get
+                // the URL for the next call from the first.
                 options.url = 'https://api.spotify.com/v1/me/playlists';
                 var moreToDownload = true;
                 var playlistUris = [];
@@ -127,42 +129,39 @@ router.get('/download', isLoggedIn, function(req,res) {
                             playlistUris = playlistUris.concat(results.items.map((aPlaylist) => aPlaylist.tracks.href));
                             moreToDownload = (results.next === null) ? false : true; 
                             options.url = moreToDownload ? results.next : null;
-                            cb(); // next iteration of whilst loop  
+                            cb(); // Next iteration of the "get playlists" whilst loop  
                         });
                     }, function(err, n) {
-                        callback(null, playlistUris); // finishes waterfall item
-                    }
-                );
-            }, function(playlistUris, callback) {
-                // Download and store songs from each of the user's playlists. So. We're going to start by 
-                // looping through the playlistUri array... BUT each playlist can have more than 50 songs,
-                // So we're going to need a nested loop. FML.
-                var count = 0;
-                async.whilst(function() {
-                        return (count < (playlistUris.length - 1));
-                    }, function(cb) {
-                        options.url = playlistUris[count];
-                        // We now have the URI for a single playlist. Download playlist's songs, looping 
-                        // as necessary.
-                        var moreToDownload = true;
-                        async.whilst(function() {
-                                return moreToDownload;
-                            }, function(callB) {
-                                request(options, function(error,response,body) {
-                                    var trackList = JSON.parse(body);
-                                    storeTracks(trackList.items, user, true).then(function() {
-                                        moreToDownload = (trackList.next === null) ? false : true; 
-                                        options.url = moreToDownload ? trackList.next : null;
-                                        callB(); // next iteration of inner whilst
-                                    });
-                                });
-                            }, function() {
-                                count++;
-                                cb(); // next iteration of outer whilst... next playlist
+                        // Now we need to download and store songs from each playlist. So, we're going to start by 
+                        // looping through the playlistUri array. This loop can be asynchronous since downloading the songs for
+                        // one playlist is independent of downloading another's. But we need to wait on the callback for async.parallel
+                        // until all playlists have been downloaded.
+                        async.each(playlistUris, 
+                            function(playlistUri, cb) {
+                                options.url = playlistUri;
+                                // Each playlist can have more than 50 songs, so we need a third nested loop to handle multiple requests 
+                                // per playlist. This loop needs to be be synchronous because we get the URI for the next call from 
+                                // the previous one.
+                                var moreToDownload = true;
+                                async.whilst(function() {
+                                        return moreToDownload;
+                                    }, function(callB) {
+                                        request(options, function(error,response,body) {
+                                            var trackList = JSON.parse(body);
+                                            storeTracks(trackList.items, user, true).then(function() {
+                                                moreToDownload = (trackList.next === null) ? false : true; 
+                                                options.url = moreToDownload ? trackList.next : null;
+                                                callB(); // download the next batch of songs
+                                            });
+                                        });
+                                    }, function() {
+                                        cb(); // let async.each know that we're done downloading songs for this playlist
+                                    }
+                                );
+                            }, function(err, n) {
+                                callback(); // finishes parallel item
                             }
                         );
-                    }, function(err, n) {
-                        callback(); // finishes waterfall item
                     }
                 );
             }
