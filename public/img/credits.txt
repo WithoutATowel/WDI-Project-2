@@ -1,2 +1,2 @@
-Campfire --> Photo by Kimson Doan on Unsplash
-Concert --> Photo by Nainoa Shizuru on Unsplash
+Campfire: Photo by Kimson Doan on Unsplash
+Concert: Photo by Nainoa Shizuru on Unsplash
