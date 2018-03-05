@@ -32,7 +32,8 @@ The app uses Spotify OAuth for login, and automatically detects whether the user
 
 #### Playlists Page
 This view shows the user a full list of the playlists they've created with the app.
-![alt text](/readme-images/wireframe-favorites.png "Favorites Wireframe")
+![alt text](/readme-images/playlists.png "Playlists")
+![alt text](/readme-images/playlists-mobile.png "Mobile playlists")
 
 #### Further Wireframes
 If you'd like to view the full set of frames used for the construction of this app, take a look at this [Google presentation](https://docs.google.com/presentation/d/18Dq2nJO0eImqZkxXiXRSWnaHD_h1VhhrIk2fwR2aTv8/).
