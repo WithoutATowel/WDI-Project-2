@@ -79,7 +79,7 @@ router.post('/', isLoggedIn, function(req, res) {
 
 // GET /playlists/:id view a specific playlist
 router.get('/:id', isLoggedIn, function(req, res) {
-    db.playlist.find({
+    db.playlist.findOne({
         where: { id: req.params.id },
         include: [db.song]
     }).then(function(playlist) {
@@ -253,7 +253,7 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
 
 // DELETE /playlists/:id delete a playlist
 router.delete('/:id', isLoggedIn, function(req, res) {
-    db.playlist.find({
+    db.playlist.findOne({
         where: { id: req.params.id },
         include: [db.user]
     }).then(function(playlist) {
