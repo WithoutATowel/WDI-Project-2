@@ -114,7 +114,7 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
             callback();
         } else {
             // Prep options and create the playlist.
-            db.playlist.findById(playlistId).then(function(playlist) {
+            db.playlist.findByPk(playlistId).then(function(playlist) {
                 var newSpotifyPlaylist = {
                     name: playlist.name,
                     public: false 
@@ -175,7 +175,7 @@ router.post('/:id/spotify', isLoggedIn, function(req, res) {
                 }, {
                     where: { id: userId }
                 }).then(function(data) {
-                    db.user.findById(userId).then(function(user) {
+                    db.user.findByPk(userId).then(function(user) {
                         req.login(user, function(err) {
                             callback();
                         });

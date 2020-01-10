@@ -178,7 +178,7 @@ router.get('/download', isLoggedIn, function(req,res) {
 // GET /profile/ready is a route that client-side JavaScript can ping from the "loading" page to check
 // whether or not to redirect to the welcome page.
 router.get('/ready', isLoggedIn, function(req, res) {
-    db.user.findById(req.user.id).then(function(user) {
+    db.user.findByPk(req.user.id).then(function(user) {
         // Check whether song data has been fully downloaded for the user, and let the client-side AJAX know
         if (user.songDataDownloaded) {
             res.send('Download complete');
@@ -200,7 +200,7 @@ router.put('/', isLoggedIn, function(req, res) {
     }, {
         where: { id: req.user.id }
     }).then(function(data) {
-        db.user.findById(req.user.id).then(function(user) {
+        db.user.findByPk(req.user.id).then(function(user) {
             req.login(user, function(err) {
                 if (err) {
                     console.log(err);
