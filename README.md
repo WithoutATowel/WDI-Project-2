@@ -94,3 +94,5 @@ There are a lot of additional features I'd like to add to Harmonize. I look forw
 * unsplash.com 
   * Campfire photo by Kimson Doan
   * Concert photo by Nainoa Shizuru
+
+node index.js to run locally.
